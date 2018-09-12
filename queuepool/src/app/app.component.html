@@ -1,0 +1,55 @@
+<div class="content-wrapper">
+    <div class="tiradentes">
+        <table>
+            <thead class="title">
+                TIRADENTES
+            </thead>
+            <thead>
+                <th>Jogador 1</th>
+                <th>Jogador 2</th>
+            </thead>
+            <tr *ngFor="let team of tiradentesList">
+                <td>{{ team[0]?.name }}</td>
+                <td>{{ team[1]?.name }}</td>
+            </tr>
+        </table>
+        <div *ngIf="tiradentesList.length === 0">FILA VAZIA...</div>
+        <button (click)="openDialog('tiradentes')">Entrar na Fila</button>
+    </div>
+    <br><br>
+    <div class="apolo">
+        <table>
+            <thead class="title">
+                APOLO
+            </thead>
+            <thead>
+                <th>Jogador 1</th>
+                <th>Jogador 2</th>
+            </thead>
+            <tr *ngFor="let team of apoloList">
+                <td>{{ team[0]?.name }}</td>
+                <td>{{ team[1]?.name }}</td>
+            </tr>
+        </table>
+        <div *ngIf="apoloList.length === 0">FILA VAZIA...</div>
+        <button (click)="openDialog('apolo')">Entrar na Fila</button>
+    </div>
+    <div *ngIf="isModalOpen" class="modal">
+
+        <div class="modal-content">
+            <span (click)="closeDialog()" class="close">&times;</span>
+            <Label for="player1Name">Nome do primeiro integrante: </Label>
+            <input id="player1Name" type="text" [(ngModel)]="player1Name" >
+            <br>
+            <br>
+            <Label for="player1Name">Nome do segundo integrante: </Label>
+            <input id="player2Name" type="text" [(ngModel)]="player2Name">
+            <br>
+            <br>
+            <span class="warn">Se não tiver dupla insira seu nome em apenas um dos campos.</span>
+            <br>
+            <button (click)="sendPlayersNames()">Entrar</button>
+        </div>
+    
+    </div>
+</div>
