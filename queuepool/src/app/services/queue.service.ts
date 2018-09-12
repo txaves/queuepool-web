@@ -16,4 +16,9 @@ export class QueueService {
     public sendNames(queueName: string, players: any): Observable<HttpResponse<any>> {
         return this.http.post(`${QueueService.URL_QUEUE_BASE}/${queueName}`, players, { observe: 'response' });
     }
+
+    public deletePlayer(queueName: string, playerId: any): Observable<HttpResponse<any>> {
+        return this.http.request('delete', `${QueueService.URL_QUEUE_BASE}/${queueName}`,
+        { body: { playerId: playerId }, observe: 'response' });
+    }
 }

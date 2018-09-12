@@ -4,10 +4,13 @@ table{
 }
 
 td, th{
+    max-width: 200px;
     border: 1px solid gray;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
-td{
+td, th{
     width: 50%;
 }
 
@@ -64,4 +67,16 @@ td{
 .warn {
     color: #888;
     font-size: 14px;
+}
+
+.trash {
+    cursor: pointer;
+    float: right;
+    background-image: url(../assets/images/trash.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
 }

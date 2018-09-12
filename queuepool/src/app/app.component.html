@@ -9,8 +9,8 @@
                 <th>Jogador 2</th>
             </thead>
             <tr *ngFor="let team of tiradentesList">
-                <td>{{ team[0]?.name }}</td>
-                <td>{{ team[1]?.name }}</td>
+                <td><span>{{ team[0]?.name }}</span> <div (click)="removePlayer('tiradentes',team[0]?.id)" class="trash"></div></td>
+                <td><span>{{ team[1]?.name }}</span> <div *ngIf="team[1]" (click)="removePlayer('tiradentes',team[1]?.id)" class="trash"></div></td>
             </tr>
         </table>
         <div *ngIf="tiradentesList.length === 0">FILA VAZIA...</div>
@@ -27,8 +27,8 @@
                 <th>Jogador 2</th>
             </thead>
             <tr *ngFor="let team of apoloList">
-                <td>{{ team[0]?.name }}</td>
-                <td>{{ team[1]?.name }}</td>
+                <td><span>{{ team[0]?.name }}</span> <div (click)="removePlayer('apolo',team[0]?.id)" class="trash"></div></td>
+                <td><span>{{ team[1]?.name }}</span> <div *ngIf="team[1]" (click)="removePlayer('apolo',team[1]?.id)" class="trash"></div></td>
             </tr>
         </table>
         <div *ngIf="apoloList.length === 0">FILA VAZIA...</div>
@@ -48,7 +48,7 @@
             <br>
             <span class="warn">Se não tiver dupla insira seu nome em apenas um dos campos.</span>
             <br>
-            <button (click)="sendPlayersNames()">Entrar</button>
+            <button [disabled]="isClickDisabled" (click)="sendPlayersNames()">Entrar</button>
         </div>
     
     </div>

@@ -11,6 +11,7 @@ export class AppComponent {
   public tiradentesList: string[] = [];
   public apoloList: string[] = [];
   public isModalOpen = false;
+  public isClickDisabled = false;
   public queueName = '';
   public player1Name = '';
   public player2Name = '';
@@ -37,9 +38,12 @@ export class AppComponent {
   public closeDialog() {
     this.isModalOpen = false;
     this.queueName = '';
+    this.player1Name = '';
+    this.player2Name = '';
   }
 
   public sendPlayersNames() {
+    this.isClickDisabled = true;
     if (this.queueName !== '') {
       if (this.player1Name !== '' || this.player2Name !== '') {
         const players = {
@@ -52,14 +56,31 @@ export class AppComponent {
             window.location.reload();
           },
           error => {
-            alert('Erro ao entrar');
+            alert('Erro ao adicionar jogador na fila');
+            this.isClickDisabled = false;
           }
         );
       } else {
         alert('É preciso inserir pelo menos 1 nome');
+        this.isClickDisabled = false;
       }
     } else {
       alert('Fila inválida');
+      this.isClickDisabled = false;
+    }
+  }
+
+  public removePlayer(queue: string, id: string) {
+    if (confirm('Tem certeza que deseja excluir o jogador?')) {
+      this.queueService.deletePlayer(queue, id).subscribe(
+        result => {
+          alert('Excluído com sucesso');
+          window.location.reload();
+        },
+        error => {
+          alert('Falha ao excluir');
+        }
+      );
     }
   }
 }
