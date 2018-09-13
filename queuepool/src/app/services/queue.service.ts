@@ -21,4 +21,9 @@ export class QueueService {
         return this.http.request('delete', `${QueueService.URL_QUEUE_BASE}/${queueName}`,
         { body: { playerId: playerId }, observe: 'response' });
     }
+
+    public removeTeam(queueName: string, playerId: any, playertwoId): Observable<HttpResponse<any>> {
+        return this.http.request('delete', `${QueueService.URL_QUEUE_BASE}/${queueName}`,
+        { body: { playerId: playerId, playertwoId: playertwoId }, observe: 'response' });
+    }
 }

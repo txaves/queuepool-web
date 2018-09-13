@@ -3,6 +3,7 @@
         <table>
             <thead class="title">
                 TIRADENTES
+                <button (click)="removeTeam('tiradentes', tiradentesList)">Next</button>
             </thead>
             <thead>
                 <th>Jogador 1</th>
@@ -21,6 +22,7 @@
         <table>
             <thead class="title">
                 APOLO
+                <button (click)="removeTeam('apolo', apoloList)">Next</button>
             </thead>
             <thead>
                 <th>Jogador 1</th>
@@ -46,7 +48,7 @@
             <input id="player2Name" type="text" [(ngModel)]="player2Name">
             <br>
             <br>
-            <span class="warn">Se não tiver dupla insira seu nome em apenas um dos campos.</span>
+            <span class="warn">Insira ao menos um nome para entrar na fila.</span>
             <br>
             <button [disabled]="isClickDisabled" (click)="sendPlayersNames()">Entrar</button>
         </div>

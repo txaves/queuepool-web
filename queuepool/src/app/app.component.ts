@@ -8,8 +8,8 @@ import { QueueService } from './services/queue.service';
 })
 export class AppComponent {
 
-  public tiradentesList: string[] = [];
-  public apoloList: string[] = [];
+  public tiradentesList: any[] = [];
+  public apoloList: any[] = [];
   public isModalOpen = false;
   public isClickDisabled = false;
   public queueName = '';
@@ -73,6 +73,21 @@ export class AppComponent {
   public removePlayer(queue: string, id: string) {
     if (confirm('Tem certeza que deseja excluir o jogador?')) {
       this.queueService.deletePlayer(queue, id).subscribe(
+        result => {
+          alert('Excluído com sucesso');
+          window.location.reload();
+        },
+        error => {
+          alert('Falha ao excluir');
+        }
+      );
+    }
+  }
+
+  public removeTeam(queue: string, queueList: any) {
+    const teamOnTop = queueList[0];
+    if (confirm(teamOnTop[0].name + ' e ' + teamOnTop[1].name + ' iniciaram o jogo?')) {
+      this.queueService.removeTeam(queue, teamOnTop[0].id, teamOnTop[1].id).subscribe(
         result => {
           alert('Excluído com sucesso');
           window.location.reload();
