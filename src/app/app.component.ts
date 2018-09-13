@@ -11,10 +11,13 @@ export class AppComponent {
   public tiradentesList: any[] = [];
   public apoloList: any[] = [];
   public isModalOpen = false;
+  public isPartnerModalOpen = false;
   public isClickDisabled = false;
   public queueName = '';
   public player1Name = '';
   public player2Name = '';
+  public playerName = '';
+  public partner: any;
 
   constructor(private queueService: QueueService) {
     this.checkListStatus();
@@ -33,6 +36,18 @@ export class AppComponent {
   public openDialog(queueName: string) {
     this.isModalOpen = true;
     this.queueName = queueName;
+  }
+
+  public openPartnerDialog(queueName: string, partner: any) {
+    this.isPartnerModalOpen = true;
+    this.partner = partner;
+    this.queueName = queueName;
+  }
+
+  public closePartnerDialog() {
+    this.isPartnerModalOpen = false;
+    this.queueName = '';
+    this.playerName = '';
   }
 
   public closeDialog() {
@@ -62,6 +77,30 @@ export class AppComponent {
         );
       } else {
         alert('É preciso inserir pelo menos 1 nome');
+        this.isClickDisabled = false;
+      }
+    } else {
+      alert('Fila inválida');
+      this.isClickDisabled = false;
+    }
+  }
+
+  public sendPartner() {
+    this.isClickDisabled = true;
+    if (this.queueName !== '') {
+      if (this.playerName !== '') {
+        this.queueService.sendPartner(this.queueName, this.playerName, this.partner.id).subscribe(
+          result => {
+            this.closePartnerDialog();
+            window.location.reload();
+          },
+          error => {
+            alert('Erro ao adicionar jogador na fila');
+            this.isClickDisabled = false;
+          }
+        );
+      } else {
+        alert('Insira o nome do jogador');
         this.isClickDisabled = false;
       }
     } else {

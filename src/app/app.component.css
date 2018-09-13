@@ -69,14 +69,26 @@ td, th{
     font-size: 14px;
 }
 
-.trash {
+.icon {
     cursor: pointer;
     float: right;
-    background-image: url(../assets/images/trash.png);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
     margin-right: 5px;
     width: 15px;
     height: 15px;
+}
+
+.modal-title {
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.trash {
+    background-image: url(../assets/images/trash.png);
+}
+
+.add {
+    background-image: url(../assets/images/add.png);
 }
