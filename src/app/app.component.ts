@@ -125,16 +125,30 @@ export class AppComponent {
 
   public removeTeam(queue: string, queueList: any) {
     const teamOnTop = queueList[0];
-    if (confirm(teamOnTop[0].name + ' e ' + teamOnTop[1].name + ' iniciaram o jogo?')) {
-      this.queueService.removeTeam(queue, teamOnTop[0].id, teamOnTop[1].id).subscribe(
-        result => {
-          alert('Excluído com sucesso');
-          window.location.reload();
-        },
-        error => {
-          alert('Falha ao excluir');
-        }
-      );
+    if (teamOnTop.length === 2) {
+      if (confirm(teamOnTop[0].name + ' e ' + teamOnTop[1].name + ' iniciaram o jogo?')) {
+        this.queueService.removeTeam(queue, teamOnTop[0].id, teamOnTop[1].id).subscribe(
+          result => {
+            alert('Excluído com sucesso');
+            window.location.reload();
+          },
+          error => {
+            alert('Falha ao excluir');
+          }
+        );
+      }
+    } else {
+      if (confirm('O jogador não tem dupla ainda, deseja excluir?')) {
+        this.queueService.deletePlayer(queue, teamOnTop[0].id).subscribe(
+          result => {
+            alert('Excluído com sucesso');
+            window.location.reload();
+          },
+          error => {
+            alert('Falha ao excluir');
+          }
+        );
+      }
     }
   }
 }
